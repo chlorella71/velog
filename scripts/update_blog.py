@@ -35,7 +35,7 @@ for entry in feed.entries:
     # 파일이 이미 존재하지 않으면 생성
     if not os.path.exists(file_path):
         with open(file_path, 'w', encoding='utf-8') as file:
-            file.write(entry, "description")  # 글 내용을 파일에 작성
+            file.write(getattr(entry, "description", getattr(entry, "summary", "내용 없음")))  # 글 내용을 파일에 작성
 
         # 깃허브 커밋
         repo.git.add(file_path)
